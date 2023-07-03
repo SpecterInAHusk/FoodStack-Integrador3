@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+      <app-custom-header></app-custom-header>
+      <meta charset="UTF-8">
+      <link href="./hamburger.page.scss" rel="stylesheet" />
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="body-container">
+    <body id ="main">
+      <div class="lanches-internos row">
+        <div class="col-xl-3 col-md-4 col-6 item-view" *ngFor="let hamburguer of hamburgueres">
+          <div class="container-lista">
+            <div class="nome-lanche"><h2>{{ hamburguer.nome }}</h2></div>
+            <div class="lista-ingrediente">
+              <ul>
+                <li *ngFor="let ingredient of hamburguer.burger">
+                  <div class="nome-ingrediente">
+                    <h3>{{ ingredient.name }}</h3>
+                  </div>
+                </li>
+              </ul>
+              <div class="calorias">Calorias: {{ hamburguer.calories }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+  </div>
+  <app-custom-footer></app-custom-footer>
+</ion-content>

@@ -1,0 +1,125 @@
+<ion-header>
+    <ion-toolbar>
+        <app-custom-header></app-custom-header>
+        <meta charset="UTF-8">
+        <link href="./home.page.scss" rel="stylesheet" />
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div id="body-container">
+        <body id ="main">
+            <div class="carousel-container">
+            <div class="carousel my-carousel carousel--translate">
+                <input class="carousel__activator" type="radio" name="carousel" id="F" checked="checked"/>
+                <input class="carousel__activator" type="radio" name="carousel" id="G"/>
+                <input class="carousel__activator" type="radio" name="carousel" id="H"/>
+                <input class="carousel__activator" type="radio" name="carousel" id="I"/>
+                <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="I"></label>
+                <label class="carousel__control carousel__control--forward" for="G"></label>
+                </div>
+                <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="F"></label>
+                <label class="carousel__control carousel__control--forward" for="H"></label>
+                </div>
+                <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="G"></label>
+                <label class="carousel__control carousel__control--forward" for="I"></label>
+                </div>
+                <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="H"></label>
+                <label class="carousel__control carousel__control--forward" for="F"></label>
+                </div>
+                <div class="carousel__track">
+                <li class="carousel__slide">
+                    <h1>F</h1>
+                </li>
+                <li class="carousel__slide">
+                    <h1>G</h1>
+                </li>
+                <li class="carousel__slide">
+                    <h1>H</h1>
+                </li>
+                <li class="carousel__slide">
+                    <h1>I</h1>
+                </li>
+                </div>
+                <div class="carousel__indicators">
+                <label class="carousel__indicator" for="F"></label>
+                <label class="carousel__indicator" for="G"></label>
+                <label class="carousel__indicator" for="H"></label>
+                <label class="carousel__indicator" for="I"></label>
+                </div>
+            </div>
+            </div>
+            <div id="home-secao" class="home-secao">
+                <div class="secao-lanches container-fluid">
+                    <div class="secao-header header-sticky">
+                        <h3 class="secao-titulo">Lanches prontos</h3>
+                        <h2 class="secao-subtitulo">Lanches prontos para visualização</h2>
+                    </div>
+                    <div class="lanches">
+                        <div class="container">
+                            <div class="lanches-internos row">
+                                <div class="col-xl-3 col-md-4 col-6 item-view">
+                                    <a aria-label="">
+                                        <figure class="item-view-dotmatrix">
+                                            <div class="img-container">
+                                                <img src="/assets/img/hamburguer.png">
+                                            </div>
+                                        </figure>
+                                        <figcaption class="titulo">
+                                            <span class="titulo-lanche">Lanche bacana</span>
+                                            <span class="tipo-lanche">Hamburguer</span>
+                                        </figcaption>
+                                    </a>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-6 item-view">
+                                    <a aria-label="">
+                                        <figure class="item-view-dotmatrix">
+                                            <div class="img-container">
+                                                <img src="/assets/img/pizza.png">
+                                            </div>
+                                        </figure>
+                                        <figcaption class="titulo">
+                                            <span class="titulo-lanche">Lanche bacana</span>
+                                            <span class="tipo-lanche">Pizza</span>
+                                        </figcaption>
+                                    </a>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-6 item-view">
+                                    <a aria-label="">
+                                        <figure class="item-view-dotmatrix">
+                                            <div class="img-container">
+                                                <img src="/assets/img/cachorro-quente.png">
+                                            </div>
+                                        </figure>
+                                        <figcaption class="titulo">
+                                            <span class="titulo-lanche">Lanche bacana</span>
+                                            <span class="tipo-lanche">Cachorro-quente</span>
+                                        </figcaption>
+                                    </a>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-6 item-view">
+                                    <a aria-label="">
+                                        <figure class="item-view-dotmatrix">
+                                            <div class="img-container">
+                                                <img src="/assets/img/hamburguer.png">
+                                            </div>
+                                        </figure>
+                                        <figcaption class="titulo">
+                                            <span class="titulo-lanche">Lanche bacana</span>
+                                            <span class="tipo-lanche">Hamburguer</span>
+                                        </figcaption>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </div>
+    <app-custom-footer></app-custom-footer>
+</ion-content>

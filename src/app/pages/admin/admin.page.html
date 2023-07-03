@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Adicionar Ingrediente
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="AdminForm" (ngSubmit)="SubmitIngredient()">
+    <ion-button expand="block" (click)="expandir()">
+      Vegetais
+    </ion-button>
+    <ion-card *ngIf="exibirConteudo">
+      <ion-item *ngFor="let vegetal of vegetais">
+        <ion-label>{{vegetal.name}}</ion-label>
+        <ion-item>
+          <ion-button
+            (click)="removeVegetable(vegetal)"
+            size="small"
+            fill="clear"
+          >
+            <ion-icon name="remove"></ion-icon>
+          </ion-button>
+          <ion-input [(ngModel)]="vegetal.quantity" type="number"></ion-input>
+          <ion-button (click)="addVegetable(vegetal)" size="small" fill="clear">
+            <ion-icon name="add"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-item>
+    </ion-card>
+    <ion-item>
+      <ion-label position="floating">Calorias</ion-label>
+      <ion-input type="text" formControlName="calories"></ion-input>
+    </ion-item>
+    <ion-button expand="block" type="submit">Cadastrar</ion-button>
+  </form>
+</ion-content>

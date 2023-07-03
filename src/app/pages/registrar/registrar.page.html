@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registrar</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form (ngSubmit)="registrar()">
+    <ion-item lines="full">
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input type="text" [(ngModel)]="nome"></ion-input>
+      <ion-icon
+        slot="end"
+        name="alert-circle-outline"
+        color="danger"
+        *ngIf="!nome"
+      ></ion-icon>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Sobrenome</ion-label>
+      <ion-input type="text" [(ngModel)]="sobrenome"></ion-input>
+      <ion-icon
+        slot="end"
+        name="alert-circle-outline"
+        color="danger"
+        *ngIf="!sobrenome"
+      ></ion-icon>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="text" [(ngModel)]="email"></ion-input>
+      <ion-icon
+        slot="end"
+        name="alert-circle-outline"
+        color="danger"
+        *ngIf="!email"
+      ></ion-icon>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Senha</ion-label>
+      <ion-input type="password" [(ngModel)]="senha"></ion-input>
+      <ion-icon
+        slot="end"
+        name="alert-circle-outline"
+        color="danger"
+        *ngIf="!senha"
+      ></ion-icon>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="danger" expand="block">
+          Cadastrar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <div class="mensagem-erro" *ngIf="mensagemErro">
+      {{ mensagemErro }}
+    </div>
+  </form>
+</ion-content>

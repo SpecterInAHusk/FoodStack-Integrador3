@@ -1,0 +1,37 @@
+<header>
+  <nav id="top_navbar" class="navbar fixed-top">
+      <div class="container">
+        <div onclick="irParaHome()">
+          <a class="navbar-logo" href="/" aria-label="FoodStack Home">FoodSTACK<!-- aqui eu boto a logo --></a>
+        </div>
+          <div class="navbar">  <!--id="top-nav"-->
+              <ul class="lunch-navbar"> <!--id="top_nav"-->
+                  <li class="item" (click)="irParaMontagem()"> <!--class="nav-item montagem-menu"--> 
+                      <a class="link">Montar Lanches</a>  <!--class="nav-link"-->
+                  </li>
+                  <li class="item" (click)="irParaHamburguer()">
+                      <a class="link">Hamburguer</a>
+                  </li>
+                  <li class="item" (click)="irParaHotDog()">
+                      <a class="link">Cachorro-quente</a>
+                  </li>
+                  <li class="item" (click)="irParaPizza()">
+                      <a class="link">Pizza</a>
+                  </li>
+              </ul>
+              <ul class="user-navbar"> <!--"id="top_navright" class="navbar-nav"-->
+                  <li class="item"> <!--class="nav-item"-->
+                    <div> <!--KK fiquei o dia inteiro tentando resolver isso pra descobrir que n precisava fazer todos aqueles router module-->
+                      <a class="link"><span class="logged-out" (click)="irParaLogin()">Login</span><span class="logged-in" (click)="irParaPerfil()">Conta</span></a> <!--class="nav-link"-->
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <a class="link">Ajuda</a>
+                    </div>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+</header>

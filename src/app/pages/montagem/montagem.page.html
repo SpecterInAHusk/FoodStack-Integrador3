@@ -1,0 +1,172 @@
+<ion-header>
+  <ion-toolbar>
+    <app-custom-header></app-custom-header>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <body id="main">
+    <div class="secao-montagem">
+      <div class="montagem-hamburguer container-fluid">
+        <div class="montagem-hamburguer-header">
+          <a [routerLink]="['/hamburguer']">
+            <h3 class="titulo-header">
+              <div class="container">
+                hamburguer
+              </div>
+            </h3>
+          </a>
+        </div>
+        <div class="motangem">
+          <div class="container">
+            <div class="montagem-interna row">
+              <div class="col-xl-3 col-md-4 col-6 item-view">
+                <div class="nome-lanche">
+                    <label for="nome">Nome lanche</label>
+                    <input type="text" id="nome" name="nome" minlength="1" maxlength="20" [(ngModel)]="nomeLanche" required/>
+                  </div>                  
+                <div class="titulo-ingredientes">
+                    <h2>Ingredientes</h2>
+                </div>
+                <div class="ingredientes">
+                  <div class="container-ingredientes">
+
+                    <div class="tipo-ingredientes">
+                      <div class="nome-tipo" (click)="showVegetais = !showVegetais">Vegetais</div>
+                      <div class="lista-ingredientes" *ngIf="showVegetais">
+                        <ul>
+                            <li *ngFor="let vegetal of vegetais">
+                        <div class="ingredientes-individuais">
+                            <div class="nome-ingrediente">
+                                <h3>{{vegetal.name}}</h3>
+                            </div>
+                            <div class="botao-ingrediente">
+                                <a class="icone-ingrediente"  (click)="addVegetable(vegetal)">+</a><a class="icone-ingrediente"  (click)="removeVegetable(vegetal)">-</a><span class="quantidade-ingrediente">{{vegetal.quantity}}</span>
+                            </div>
+                        </div>
+                            </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="tipo-ingredientes">
+                        <div class="nome-tipo" (click)="showProteinas = !showProteinas">Proteinas</div>
+                        <div class="lista-ingredientes" *ngIf="showProteinas">
+                          <ul>
+                              <li *ngFor="let proteina of proteinas">
+                          <div class="ingredientes-individuais">
+                              <div class="nome-ingrediente">
+                                  <h3>{{proteina.name}}</h3>
+                              </div>
+                              <div class="botao-ingrediente">
+                                  <a class="icone-ingrediente"  (click)="addProteina(proteina)">+</a><a class="icone-ingrediente"  (click)="removeProteina(proteina)">-</a><span class="quantidade-ingrediente">{{proteina.quantity}}</span>
+                              </div>
+                          </div>
+                              </li>
+                          </ul>
+                        </div>
+                    </div>
+
+                    <div class="tipo-ingredientes">
+                        <div class="nome-tipo" (click)="showPaes = !showPaes">Pães</div>
+                        <div class="lista-ingredientes" *ngIf="showPaes">
+                          <ul>
+                              <li *ngFor="let pao of paes">
+                          <div class="ingredientes-individuais">
+                              <div class="nome-ingrediente">
+                                  <h3>{{pao.name}}</h3>
+                              </div>
+                              <div class="botao-ingrediente">
+                                  <a class="icone-ingrediente"  (click)="addPao(pao)">+</a><a class="icone-ingrediente"  (click)="removePao(pao)">-</a><span class="quantidade-ingrediente">{{pao.quantity}}</span>
+                              </div>
+                          </div>
+                              </li>
+                          </ul>
+                        </div>
+                    </div>
+
+                    <div class="tipo-ingredientes">
+                        <div class="nome-tipo" (click)="showMolhos = !showMolhos">Molhos</div>
+                        <div class="lista-ingredientes" *ngIf="showMolhos">
+                          <ul>
+                              <li *ngFor="let molho of molhos">
+                          <div class="ingredientes-individuais">
+                              <div class="nome-ingrediente">
+                                  <h3>{{molho.name}}</h3>
+                              </div>
+                              <div class="botao-ingrediente">
+                                  <a class="icone-ingrediente"  (click)="addMolho(molho)">+</a><a class="icone-ingrediente"  (click)="removeMolho(molho)">-</a><span class="quantidade-ingrediente">{{molho.quantity}}</span>
+                              </div>
+                          </div>
+                              </li>
+                          </ul>
+                        </div>
+                    </div>
+
+                    <div class="tipo-ingredientes">
+                        <div class="nome-tipo" (click)="showQueijos = !showQueijos">Queijos</div>
+                        <div class="lista-ingredientes" *ngIf="showQueijos">
+                          <ul>
+                              <li *ngFor="let queijo of queijos">
+                          <div class="ingredientes-individuais">
+                              <div class="nome-ingrediente">
+                                  <h3>{{queijo.name}}</h3>
+                              </div>
+                              <div class="botao-ingrediente">
+                                  <a class="icone-ingrediente"  (click)="addQueijo(queijo)">+</a><a class="icone-ingrediente"  (click)="removeQueijo(queijo)">-</a><span class="quantidade-ingrediente">{{queijo.quantity}}</span>
+                              </div>
+                          </div>
+                              </li>
+                          </ul>
+                        </div>
+                    </div>
+
+                    <div class="tipo-ingredientes">
+                        <div class="nome-tipo" (click)="showComplementos = !showComplementos">Complementos</div>
+                        <div class="lista-ingredientes" *ngIf="showComplementos">
+                          <ul>
+                              <li *ngFor="let complemento of complementos">
+                          <div class="ingredientes-individuais">
+                              <div class="nome-ingrediente">
+                                  <h3>{{complemento.name}}</h3>
+                              </div>
+                              <div class="botao-ingrediente">
+                                  <a class="icone-ingrediente"  (click)="addComplemento(complemento)">+</a><a class="icone-ingrediente"  (click)="removeComplemento(complemento)">-</a><span class="quantidade-ingrediente">{{complemento.quantity}}</span>
+                              </div>
+                          </div>
+                              </li>
+                          </ul>
+                        </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-md-4 col-6 item-view">
+                esse aqui tambem
+              </div>
+              <div class="col-xl-3 col-md-4 col-6 item-view">
+                <div class="balanca-calorias">
+                  <div class="imagem-balanca"></div>
+                  <div class="visualizador-calorias">
+                    <div class="contador-calorias">
+                      {{ getCalories() }}
+                    </div>
+                  </div>
+                  <div class="texto-kcal">Kcal</div>
+                  <ion-button class="botao-salvar" (click)="getBurger() && clear()">
+                    Salvar
+                  </ion-button>
+                  <ion-button class="botao-salvar" (click)="clear()">
+                    Clear
+                  </ion-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <app-custom-footer></app-custom-footer>
+</ion-content>

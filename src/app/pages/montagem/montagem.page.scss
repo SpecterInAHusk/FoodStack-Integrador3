@@ -1,0 +1,307 @@
+#main{
+    position:relative;
+    height: 100%;
+    box-sizing: border-box;
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+}
+
+.montagem-hamburguer{
+    margin-bottom: 1rem;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.container-fluid{
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.montagem-hamburguer-header{
+    position: relative;
+    letter-spacing: 2px;
+    font-weight: 700;
+    background-color: #fff;
+    color: #fff;
+    cursor: default;
+    a {
+        color: #fff;
+        cursor: pointer;
+        text-decoration: none;
+        background-color: transparent;
+    }
+    .titulo-header {
+        background: linear-gradient(to right, rgb(134, 53, 31), rgb(176, 78, 41));
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        transition-property: opacity;
+        transition-duration: 0.15s;
+        transition-timing-function: ease-out;
+        transition-delay: 0s;
+        font-size: 1.75rem;
+        line-height: 1.2;
+        margin-top: 0;
+        .container{
+            position: relative;
+            padding: 13px 0 17px;
+        }
+    }
+}
+
+.container{
+    max-width: 1400px;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.montagem-interna{
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col-xl-3 {
+    max-width: 25%;
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.container-ingredientes{
+    padding-top: 10px;
+}
+
+h1{
+    margin-bottom: -10%;
+}
+
+h2{
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.nome-lanche{
+    text-transform: uppercase;
+    color: #212529;
+    text-align: left;
+    padding: 10px;
+    label{
+        font-weight: bold;
+        line-height: 1.5;
+        margin-right: 10px;
+    }
+    input{
+        margin-right:-10px;
+    }
+}
+
+.titulo-ingredientes{
+    border: 3px solid #581a27;
+    padding-top: 30px;
+    padding-left: 30px;
+    color:rgb(238, 205, 177);
+    background-color: #581a27;
+    border-radius: 5px 0px 0px 0px;
+}
+
+.ingredientes{
+    background-color: rgb(226, 148, 83);;
+    padding: 0px 30px 30px 30px;
+    border-style: solid;
+    border-color: #581a27;
+    border-width: 0px 3px 3px 3px;
+    border-radius: 0px 0px 0px 5px;
+    max-height: 622.8px;
+    overflow-y:scroll;
+    .nome-tipo{
+        cursor: pointer;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        text-transform: uppercase;
+        font-weight: 505;
+        color: #581a27;
+    }
+    .lista-ingredientes{
+        margin-bottom: 0;
+        margin-top: 0;
+        ul {
+            list-style: none;
+            li{
+                flex-grow: 1;
+                flex-shrink: 1;
+                flex-basis: 0%;
+            }
+            .ingredientes-individuais{
+                border-bottom: 2px dotted rgb(176, 78, 41);
+                display:inline;
+                border-left: 0px;
+                border-right: 0px;
+                border-top: 0px;
+                display: flex;
+                flex-wrap: wrap;
+                margin-right: -15px;
+                margin-left: -15px;
+                margin-top: -10px;
+                .nome-ingrediente{
+                    width: 100%;
+                    margin-top: .5rem;
+                    position: relative;
+                    padding-right: 15px;
+                    padding-left: 15px;
+                    flex: 0 0 66.666667%;
+                    max-width: 66.666667%;
+                    h3{
+                        margin-bottom: 0;
+                        font-size: 22px;
+                        font-weight: 500;
+                        line-height: 1.2;
+                        margin-top: 0;
+                        text-decoration: underline;
+                        text-decoration-thickness: 2px;
+                        color: rgb(176, 78, 41);
+                    }
+                }
+                .botao-ingrediente{
+                    padding-left: 0;
+                    font-size: 14px;
+                    color: #4b6b8d;
+                    text-align: right;
+                    width: 100%;
+                    margin-top: .5rem;
+                    flex: 0 0 33.333333%;
+                    float:inline-end;
+
+                    .icone-ingrediente{
+                        background-color: rgb(238, 205, 177);
+                        border-radius:10px;
+                        text-align: center;
+                        @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+                        font-family: 'Robot Mono', monospace;
+                        font-size: 20px;
+                        font-weight: 500;
+                        margin-right: 7px;
+                        cursor: pointer;
+                        -webkit-touch-callout: none;
+                        -webkit-user-select: none;
+                        -khtml-user-select: none;
+                        -moz-user-select: none;
+                        -ms-user-select: none;
+                        user-select: none;
+                        &:hover{
+                            background-color: #4b6b8d;
+                            color: rgb(238, 205, 177);
+                        }
+                        &:active{
+                            background-color: rgb(176, 78, 41);
+                            color: rgb(238, 205, 177);
+                        }
+                    }
+
+                    .quantidade-ingrediente{
+                        font-size: 20px;
+                        color: rgb(176, 78, 41);
+                        text-align: right;
+                        font-weight: 1000;
+                        text-decoration: underline;
+                        text-decoration-thickness: 2px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.visualizador-ingrediente{
+    margin-top: 50px;
+    .visualizador-header{
+        border: 3px solid #581a27;
+        padding-top: 30px;
+        height: 92.8px;
+        padding-left: 30px;
+        background-color: #581a27;
+        border-radius: 0px 5px 0px 0px;
+    }
+    .visualizador-corpo{
+        margin-top: 0px;
+        background-color: rgb(226, 148, 83);;
+        padding: 10px 30px 30px 30px;
+        border-style: solid;
+        border-color: #581a27;
+        border-width: 0px 3px 3px 3px;
+        border-radius: 0px 0px 5px 0px;
+        .titulo-ingrediente{
+            text-transform: uppercase;
+            color: #581a27;
+            font-size: 26px;
+            margin-top: -20px;
+            margin-bottom: -10%;
+            .texto-titulo{
+                font-weight: 505;
+            }
+        }
+        .imagem-ingrediente{
+            margin-top: 30px;
+            border-style: solid;
+            border-color: #581a27;
+            border-radius: 5px;
+            border-width: 2px;
+            height: 100px;
+        }
+        .descricao-ingrediente{
+            line-height: 1.2;
+            margin-right: -15px;
+            margin-bottom: 0;
+            font-size: 22px;
+            font-weight: 500;
+            line-height: 1.2;
+            margin-top:30px;
+            color: rgb(176, 78, 41);
+        }
+    }
+}
+
+.balanca-calorias{
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    .visualizador-calorias{
+        border-radius: 5px;
+        background-color: #16781e;
+        .contador-calorias{
+            position: relative;
+            margin-right: 10px;
+            font-size: 20px;
+            text-align: right;
+            font-weight: 1000;
+            flex: 0 0 66.666667%;
+            max-width: 66.666667%;
+            min-width: 73.3334px;
+        }
+    }
+    .texto-kcal{
+        position: relative;
+        font-size: 20px;
+        text-align: left;
+        font-weight: 1000;
+        flex: 0 0 50%;
+        max-width: 66.666667%;
+    }
+}

@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-toolbar>
+        <app-custom-header></app-custom-header>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <main id="main">
+        <div id="account">
+            <div class="container">
+                <a class="float-right" (click)="sairConta()">Sair</a>
+                <h1>Informação da Conta</h1>
+            </div>
+            <div class="container">
+                <h2 class="mt-4">seus lanches</h2>
+                <div id="lanches">
+                    <span class="vazio">
+                        <div class="lanches-vazio">
+                            <p>Seu perfil está vazio</p>
+                        </div>
+                    </span>
+                    <span class="cheio">
+                        <div class="lanches-cheio">
+                            <div class="container">
+                                <div class="lanches-internos row">
+                                    <div class="col-xl-3 col-md-4 col-6 item-view" *ngFor="let hamburguer of hamburgueres">
+                                        <a aria-label="">
+                                            <figure class="item-view-dotmatrix">
+                                                <div class="img-container">
+                                                    <img src="/assets/img/hamburguer.png">
+                                                </div>
+                                            </figure>
+                                            <figcaption class="titulo">
+                                                <span class="titulo-lanche">{{ hamburguer.nome }}</span>
+                                                <span class="tipo-lanche">Hamburguer</span>
+                                            </figcaption>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </main>
+    <app-custom-footer></app-custom-footer>
+</ion-content>

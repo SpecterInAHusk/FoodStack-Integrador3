@@ -1,0 +1,8 @@
+{
+  "name": "integrador2",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "e5ddc5b7"
+}

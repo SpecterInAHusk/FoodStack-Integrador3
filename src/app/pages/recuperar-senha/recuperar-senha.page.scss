@@ -1,0 +1,61 @@
+#pagina-recuperar {
+    height: 100%;
+    max-width: 320px;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    color: #581a27;
+    .titulo {
+        margin-top: 0;
+        font-size: 24px;
+        font-weight: 700;
+    }
+    .subtitulo {
+        font-size: 16px;
+        font-weight: 300;
+    }
+    .form-recuperar {
+        background-color: rgb(238, 205, 177);
+        margin-top: 1rem;
+        padding: 30px;
+        border: 3px solid #581a27;
+        border-radius: 5px;
+        .btn-succes {
+            text-transform: uppercase;
+        }
+    }
+    .caixa-preenchimento {
+        display: block;
+        margin: 0.5rem 0;
+        .controle-form{
+            margin: 10px 0 0 0;
+            width: 100%;
+            min-height: 2em;
+            border-style: none;
+            border-radius: 5px;
+        }
+    }
+    .btn{
+        color: rgb(247, 245, 236);
+        display: block;
+        border-style: none;
+        border-radius: 5px;
+        width: 60%;
+        margin: 1em auto;
+        height: 2em;
+        font-size: 1.1rem;
+        background-color: #581a27;
+        &:hover {
+            background-color: #753c30;
+        }      
+    }
+    .texto-centrado {
+        text-align: center;
+    }
+    .link-enderecado {
+        color: rgb(134, 53, 31);
+        &:active {
+            color:#581a27;
+        }
+    }
+}
