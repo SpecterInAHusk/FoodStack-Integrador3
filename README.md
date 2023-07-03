@@ -1,3 +1,4 @@
 # FoodStack-Integrador3
 
-## ATENÇÃO: ARRUMAR INTERFACES DO FIREBASE QUANDO FIZER NPM I
+## ATENÇÃO
+Após fazer npm i, arrumar as interfaces do firebase em /node_modules/@angular/fire/compat/firestore/interfaces.d.ts adicionando <T>
