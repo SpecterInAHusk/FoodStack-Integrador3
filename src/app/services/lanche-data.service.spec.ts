@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DadosService } from './dados.service';
+import { LancheDataService } from './lanche-data.service';
 
-describe('DadosService', () => {
-  let service: DadosService;
+describe('LancheDataService', () => {
+  let service: LancheDataService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DadosService);
+    service = TestBed.inject(LancheDataService);
   });
 
   it('should be created', () => {

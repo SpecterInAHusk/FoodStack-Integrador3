@@ -1,63 +1,74 @@
-import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Ingredient } from '../models/ingredientes/ingredientes';
-
+import { Injectable } from "@angular/core";
+import { AngularFireDatabase } from "@angular/fire/compat/database";
+import { Observable } from "rxjs";
+import { Ingredient } from "../models/ingredientes/ingredientes";
+import { map } from "rxjs";
 
 @Injectable({
-    providedIn: 'root'
+	providedIn: "root",
 })
-export class IngredientService {
+export class IngredientDataService {
+	constructor(private db: AngularFireDatabase) {}
 
-    private ingredientsCollection: AngularFirestoreCollection<Ingredient>;
-    private ingredients: Observable<Ingredient[]>;
+	// Create a new ingredient
+	createIngredient(ingredient: Ingredient): Promise<void> {
+		const ingredientId = this.db.createPushId();
+		return this.db.object(`/ingredients/${ingredientId}`).set(ingredient);
+	}
 
-    constructor(private firestore: AngularFirestore, private db: AngularFireDatabase) {
-        this.ingredientsCollection = this.firestore.collection<Ingredient>('ingredients');
-        this.ingredients = this.ingredientsCollection.snapshotChanges().pipe(
-            map(actions => {
-                return actions.map(a => {
-                    const data = a.payload.doc.data() as Ingredient;
-                    const id = a.payload.doc.id;
-                    return { id, ...data };
-                });
-            })
-        );
-    }
+	// Get all ingredients
+	getAllIngredients(): Observable<Ingredient[]> {
+		return this.db.list<Ingredient>("/ingredients").valueChanges();
+	}
 
-    createIngredient(ingredient: Ingredient): Promise<void> {
-        const id = this.firestore.createId();
-        return this.firestore.doc(`ingredients/${id}`).set({
-            id,
-            type: ingredient.type,
-            name: ingredient.name,
-            category: ingredient.category,
-            calories: ingredient.calories
-        });
-    }
+	// Get an ingredient by ID
+	getIngredientById(id: string): Observable<Ingredient | null> {
+		return this.db
+			.object<Ingredient>(`/ingredients/${id}`)
+			.valueChanges()
+			.pipe(
+				map((ingredient) => ingredient || null) // Handle null result
+			);
+	}
 
-    getIngredients(): Observable<Ingredient[]> {
-        return this.ingredients;
-    }
+	// Update an ingredient
+	updateIngredient(id: string, ingredient: Ingredient): Promise<void> {
+		return this.db.object(`/ingredients/${id}`).update(ingredient);
+	}
 
-    addIngredient(ingredient: Ingredient) {
-        return this.firestore.collection<Ingredient>('ingredients').add(ingredient);
-    }
+	// Delete an ingredient
+	deleteIngredient(id: string): Promise<void> {
+		return this.db.object(`/ingredients/${id}`).remove();
+	}
+	// Search for ingredients by category (categoria)
+	searchIngredientsByCategory(categoria: string): Observable<Ingredient[]> {
+		return this.db
+			.list<Ingredient>("/ingredients", (ref) =>
+				ref.orderByChild("categoria").equalTo(categoria)
+			)
+			.valueChanges();
+	}
 
-    getIngredientsByCategory(category: string): Observable<Ingredient[]> {
-        return this.ingredients.pipe(
-            map(ingredients => ingredients.filter(ingredient => ingredient.category === category))
-        );
-    }
+	// Search for ingredients by name (nome)
+	searchIngredientsByName(nome: string): Observable<Ingredient[]> {
+		return this.db
+			.list<Ingredient>("/ingredients", (ref) =>
+				ref.orderByChild("nome").equalTo(nome)
+			)
+			.valueChanges();
+	}
 
-    getTipo() {
-        return this.db.list('tipo').valueChanges();
-    }
-
-    getCategoria(selectedValue: string) {
-        return this.db.list('categoria', ref => ref.orderByChild('parent').equalTo(selectedValue)).valueChanges();
-    }
-
+	// Search for ingredients by types of snacks (tiposLanche)
+	searchIngredientsByTypesLanche(
+		tiposLanche: string[]
+	): Observable<Ingredient[]> {
+		return this.db
+			.list<Ingredient>("/ingredients", (ref) => {
+				return ref
+					.orderByChild("tiposLanche")
+					.startAt(tiposLanche[0])
+					.endAt(tiposLanche[tiposLanche.length - 1]);
+			})
+			.valueChanges();
+	}
 }

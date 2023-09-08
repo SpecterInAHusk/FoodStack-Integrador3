@@ -61,7 +61,15 @@ const routes: Routes = [
     {
         path: 'perfil',
         loadChildren: () => import('./perfil/perfil.module').then(m => m.PerfilPageModule)
-    },
+    },  {
+    path: 'add-ingrediente',
+    loadChildren: () => import('./pages/add-ingrediente/add-ingrediente.module').then( m => m.AddIngredientePageModule)
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./pages/admin/admin.module').then( m => m.AdminPageModule)
+  },
+
 
 ];
 @NgModule({

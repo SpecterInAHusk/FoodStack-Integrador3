@@ -1,31 +1,30 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
+import { AngularFireDatabase } from "@angular/fire/compat/database";
+import { Observable } from "rxjs";
+import { User } from "../models/cliente/user";
+import { map } from "rxjs";
 
 @Injectable({
-    providedIn: 'root'
+	providedIn: "root",
 })
-export class ClienteService {
+export class UserDataService {
+	constructor(private db: AngularFireDatabase) {}
 
-    constructor() { }
-    private users: { username: string, password: string }[] = [
-        { username: 'Andre@gmail.com', password: '1234' },
-        { username: 'Felipe@gmail.com', password: 'abcd' },
-        { username: 'Paulo@gmail.com', password: 'abcd' }
-    ];
+	createUser(user: User): Promise<void> {
+		const userId = user.id;
+		return this.db.object(`/users/${userId}`).set(user);
+	}
 
-    login(username: string, password: string): boolean {
-        let authenticated = false;
-        this.users.forEach(user => {
-            if (user.username === username && user.password === password) {
-                authenticated = true;
-                return;
-            }
-        });
+	getUserById(id: string): Observable<User | null> {
+		return this.db
+			.object<User>(`/users/${id}`)
+			.valueChanges()
+			.pipe(
+				map((user) => user || null) // Handle null result
+			);
+	}
 
-        return authenticated;
-    }
-
-    cadastrar(username: string, password: string): boolean {
-        this.users.push({ username, password })
-        return true;
-    }
+	updateUser(id: string, user: User): Promise<void> {
+		return this.db.object(`/users/${id}`).update(user);
+	}
 }

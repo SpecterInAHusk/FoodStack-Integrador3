@@ -1,49 +1,33 @@
-import { Injectable } from '@angular/core';
-import { Favoritos } from '../models/favoritos/favoritos';
-import { Ingredient } from '../models/ingredientes/ingredientes';
-import { Hamburguer } from '../models/produtos/hamburger';
-import { HotDog } from '../models/produtos/hot-dog';
-import { Pizza } from '../models/produtos/pizza';
+import { Injectable } from "@angular/core";
+import { AngularFirestore } from "@angular/fire/compat/firestore";
 
 @Injectable({
-    providedIn: 'root'
+	providedIn: "root",
 })
-export class FavoritosService {
-    constructor() {
-    }
-    lanches: {
-        burger: Hamburguer[],
-        hotDog: HotDog[],
-        pizza: Pizza[],
-    };
+export class FavoriteService {
+	constructor(private firestore: AngularFirestore) {}
 
-    adicionarFavorito(lanche: Hamburguer): void {
-        this.hamburgueres.push(lanche);
-    }
+	
+	//Adicionar Favorito
+	addFavoriteSnack(userId: string, favoriteSnackId: string, snackData: any) {
+		return this.firestore
+			.collection(`favorites/${userId}/snacks`)
+			.doc(favoriteSnackId)
+			.set(snackData);
+	}
 
-    removerFavorito(lanche: Hamburguer | HotDog | Pizza): void {
-        switch (lanche.constructor) {
-            case Hamburguer:
-                this.lanches.burger = this.lanches.burger.filter((item) => item.nome !== lanche.nome);
-                break;
-            case HotDog:
-                this.lanches.hotDog = this.lanches.hotDog.filter((item) => item.nome !== lanche.nome);
-                break;
-            case Pizza:
-                this.lanches.pizza = this.lanches.pizza.filter((item) => item.nome !== lanche.nome);
-                break;
-            default:
-                throw new Error('Lanche inválido.');
-        }
-    }
-    hamburgueres: Hamburguer[] = []
-    obterPizza(): Pizza[] {
-        return this.lanches.pizza;
-    }
-    obterHotDog(): HotDog[] {
-        return this.lanches.hotDog;
-    }
-    obterHamburguer(): Hamburguer[] {
-        return this.hamburgueres;
-    }
+	//Buscar Favoritos
+	getFavoriteSnacks(userId: string) {
+		return this.firestore
+			.collection(`favorites/${userId}/snacks`)
+			.valueChanges();
+	}
+	
+	// Remover favorito
+	removeFavoriteSnack(userId: string, favoriteSnackId: string) {
+		return this.firestore
+			.collection(`favorites/${userId}/snacks`)
+			.doc(favoriteSnackId)
+			.delete();
+	}
 }

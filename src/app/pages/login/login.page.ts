@@ -1,55 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ClienteService } from 'src/app/services/cliente-service.service';
+import { Component } from "@angular/core";
+import { AngularFireAuth } from "@angular/fire/compat/auth";
+import { ToastController } from "@ionic/angular"; // Import ToastController
+
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.page.html',
-    styleUrls: ['./login.page.scss'],
+	selector: "app-login",
+	templateUrl: "./login.page.html",
+	styleUrls: ["./login.page.scss"],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
+	email: string = "";
+	password: string = "";
 
-    constructor(private router: Router, private clienteService: ClienteService, private formBuilder: FormBuilder) { }
+	constructor(
+		private afAuth: AngularFireAuth,
+		private toastController: ToastController // Inject ToastController
+	) {}
 
-    email: string;
-    senha: string;
-    mensagemErro: string = '';
+	async login() {
+		try {
+			const result = await this.afAuth.signInWithEmailAndPassword(
+				this.email,
+				this.password
+			);
 
-    loginForm: FormGroup = this.formBuilder.group({
-        email: ['', Validators.required],
-        password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
-    });
+			// Display a success message using Ion Toast
+			this.presentToast("Login successful.");
 
-    ngOnInit() {
-        this.loginForm = this.formBuilder.group({
-            email: ['', Validators.required],
-            password: ['', Validators.required]
-        });
-    }
+			console.log("Login successful:", result.user);
+		} catch (error) {
+			// Display an error message using Ion Toast
+			this.presentToast("Login error: " + ((error as any).message));
 
-    onSubmit() {
-        if (this.loginForm.valid) {
-            this.login();
-        } else {
-            // show error message
-        }
-    }
+			console.error("Login error:", error);
+		}
+	}
 
-    login() {
-        if (!this.email || !this.senha) {
-            this.mensagemErro = 'Por favor, preencha todos os campos.';
-        } else {
-            if (this.clienteService.login(this.email, this.senha)) {
-                this.email = "";
-                this.senha = "";
-                this.mensagemErro = " ";
-                this.router.navigate(['/home']);
-                const foo = <HTMLElement>document.querySelector("body");
-                foo.classList.add("conta");
-            }
-            else {
-                this.mensagemErro = 'Usuario ou senha inválidos';
-            }
-        }
-    }
+	async presentToast(message: string) {
+		const toast = await this.toastController.create({
+			message: message,
+			duration: 3000, // Display for 3 seconds
+			position: "top",
+		});
+		toast.present();
+	}
 }

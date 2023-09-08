@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Favoritos } from 'src/app/models/favoritos/favoritos';
 import { Ingredient } from 'src/app/models/ingredientes/ingredientes';
-import { Hamburguer } from 'src/app/models/produtos/hamburger';
-import { HotDog } from 'src/app/models/produtos/hot-dog';
-import { Pizza } from 'src/app/models/produtos/pizza';
 import { DadosService } from 'src/app/services/dados.service';
-import { FavoritosService } from 'src/app/services/favoritos.service';
 
 @Component({
     selector: 'app-montagem',
