@@ -35,7 +35,7 @@
             required
           />
         </div>
-        <input class="btn btn-success btn-block" type="submit" value="login" />
+        <input class="btn btn-success btn-block" type="submit" value="login" (click)="login()"/>
         <p class="texto-centrado">- ou -</p>
         <p class="texto-centrado">
           Novo?
@@ -48,9 +48,6 @@
             Esqueceu sua senha?
           </a>
         </p>
-        <div class="mensagem-erro" *ngIf="mensagemErro">
-          {{ mensagemErro }}
-        </div>
       </form>
     </div>
   </div>

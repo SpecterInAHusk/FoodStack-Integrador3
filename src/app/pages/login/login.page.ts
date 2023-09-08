@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
-import { ToastController } from "@ionic/angular"; // Import ToastController
+import { ToastController } from "@ionic/angular"; 
 
 @Component({
 	selector: "app-login",
@@ -13,7 +13,7 @@ export class LoginPage {
 
 	constructor(
 		private afAuth: AngularFireAuth,
-		private toastController: ToastController // Inject ToastController
+		private toastController: ToastController
 	) {}
 
 	async login() {
@@ -23,22 +23,22 @@ export class LoginPage {
 				this.password
 			);
 
-			// Display a success message using Ion Toast
-			this.presentToast("Login successful.");
+			// Mensagem de sucesso
+			this.presentToast("Login efetuado com sucesso!.");
 
-			console.log("Login successful:", result.user);
+			console.log("Login efetuado com sucesso:", result.user);
 		} catch (error) {
-			// Display an error message using Ion Toast
-			this.presentToast("Login error: " + ((error as any).message));
+			// Mensagem de erro
+			this.presentToast("Falha no login: " + ((error as any).message));
 
-			console.error("Login error:", error);
+			console.error("Falha no login:", error);
 		}
 	}
 
 	async presentToast(message: string) {
 		const toast = await this.toastController.create({
 			message: message,
-			duration: 3000, // Display for 3 seconds
+			duration: 3000, // Mostrar por 3s
 			position: "top",
 		});
 		toast.present();
