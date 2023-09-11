@@ -138,6 +138,20 @@ h2{
         text-transform: uppercase;
         font-weight: 505;
         color: #581a27;
+        display: inline;
+        display: flex;
+        flex-wrap: wrap;
+        .hide, .show {
+            font-family: "Bitstream Vera Mono";
+            text-transform: lowercase;
+            font-weight: 505;
+            color: #581a27;
+            position: relative;
+        }
+        
+        .hide:hover, .show:hover {
+            color: #C5AFB3;
+        }
     }
     .lista-ingredientes{
         margin-bottom: 0;

@@ -359,6 +359,11 @@
                         border-radius: 5px;
                         width: 320px;
                         height: 320px;
+                        :hover{
+                            transform: scale(1.05);
+                            transition: all .15s ease-out;
+                            cursor: pointer;
+                        }
 
                         .img{
                             position: absolute;

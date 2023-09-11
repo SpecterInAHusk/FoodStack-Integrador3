@@ -12,4 +12,9 @@ export class HomePage implements OnInit {
     ngOnInit() {
     }
 
+    showPopup(event: MouseEvent) {
+        const popup = (event.currentTarget as HTMLElement).querySelector(".popupcaixa");
+        popup!.classList.toggle("show");
+        console.log("AAAAAAAAAA");
+    }      
 }
