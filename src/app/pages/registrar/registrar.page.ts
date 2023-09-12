@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
-import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { ToastController } from "@ionic/angular";
+import { UserDataService } from "src/app/services/cliente-service.service";
+import { Router } from "@angular/router";
 
 @Component({
 	selector: "app-registrar",
@@ -13,24 +14,22 @@ export class RegistrationPage {
 	nome: string = "";
 
 	constructor(
-		private afAuth: AngularFireAuth,
-		private toastController: ToastController
+		private userData: UserDataService,
+		private toastController: ToastController,
+		private router: Router
 	) {}
 
 	async register() {
 		try {
-			const result = await this.afAuth.createUserWithEmailAndPassword(
+			const result = await this.userData.createUser(
 				this.email,
-				this.password
+				this.password,
+				this.nome
 			);
 
-			// Atualizar o nome do usuário
-			await result.user?.updateProfile({ displayName: this.nome });
-
-			// Successful registration
-			console.log("Registration successful:", result.user);
+			console.log("Registro realizado com sucesso!");
 		} catch (error) {
-			console.error("Registration error:", error);
+			console.error("Erro no registro!");
 		}
 	}
 

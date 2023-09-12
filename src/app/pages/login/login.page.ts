@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { AngularFireAuth } from "@angular/fire/compat/auth";
+import { UserDataService } from "src/app/services/cliente-service.service";
 import { ToastController } from "@ionic/angular"; 
 
 @Component({
@@ -12,26 +12,24 @@ export class LoginPage {
 	password: string = "";
 
 	constructor(
-		private afAuth: AngularFireAuth,
+		private userData: UserDataService,
 		private toastController: ToastController
 	) {}
 
 	async login() {
 		try {
-			const result = await this.afAuth.signInWithEmailAndPassword(
+			const result = await this.userData.loginUser(
 				this.email,
 				this.password
 			);
 
 			// Mensagem de sucesso
-			this.presentToast("Login efetuado com sucesso!.");
+			this.presentToast("Login efetuado com sucesso!");
 
-			console.log("Login efetuado com sucesso:", result.user);
 		} catch (error) {
 			// Mensagem de erro
-			this.presentToast("Falha no login: " + ((error as any).message));
+			this.presentToast("Falha no login!");
 
-			console.error("Falha no login:", error);
 		}
 	}
 

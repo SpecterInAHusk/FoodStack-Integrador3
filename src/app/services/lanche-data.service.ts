@@ -1,27 +1,28 @@
 import { Injectable } from "@angular/core";
-import { AngularFireDatabase } from "@angular/fire/compat/database";
+import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { Observable } from "rxjs";
 import { Lanche } from "../models/produtos/lanche";
-import { map } from "rxjs";
+import { map } from "rxjs/operators";
 
 @Injectable({
 	providedIn: "root",
 })
 export class LancheDataService {
-	constructor(private db: AngularFireDatabase) {}
+	constructor(private firestore: AngularFirestore) {}
 
 	createLanche(lanche: Lanche): Promise<void> {
-		const lancheId = this.db.createPushId();
-		return this.db.object(`/lanches/${lancheId}`).set(lanche);
+		const lancheId = this.firestore.createId();
+		return this.firestore.collection("lanches").doc(lancheId).set(lanche);
 	}
 
 	getAllLanches(): Observable<Lanche[]> {
-		return this.db.list<Lanche>("/lanches").valueChanges();
+		return this.firestore.collection<Lanche>("lanches").valueChanges();
 	}
 
 	getLancheById(id: string): Observable<Lanche | null> {
-		return this.db
-			.object<Lanche>(`/lanches/${id}`)
+		return this.firestore
+			.collection("lanches")
+			.doc<Lanche>(id)
 			.valueChanges()
 			.pipe(
 				map((lanche) => lanche || null) // Handle null result
@@ -29,33 +30,33 @@ export class LancheDataService {
 	}
 
 	updateLanche(id: string, lanche: Lanche): Promise<void> {
-		return this.db.object(`/lanches/${id}`).update(lanche);
+		return this.firestore.collection("lanches").doc(id).update(lanche);
 	}
 
 	deleteLanche(id: string): Promise<void> {
-		return this.db.object(`/lanches/${id}`).remove();
+		return this.firestore.collection("lanches").doc(id).delete();
 	}
 
 	searchSnacksByAutor(autor: string): Observable<Lanche[]> {
-		return this.db
-			.list<Lanche>("/lanches", (ref) =>
-				ref.orderByChild("autor").equalTo(autor)
+		return this.firestore
+			.collection<Lanche>("lanches", (ref) =>
+				ref.where("autor", "==", autor)
 			)
 			.valueChanges();
 	}
 
 	searchSnacksByNome(nome: string): Observable<Lanche[]> {
-		return this.db
-			.list<Lanche>("/lanches", (ref) =>
-				ref.orderByChild("nome").equalTo(nome)
+		return this.firestore
+			.collection<Lanche>("lanches", (ref) =>
+				ref.where("nome", "==", nome)
 			)
 			.valueChanges();
 	}
 
 	searchSnacksByCategory(category: string): Observable<Lanche[]> {
-		return this.db
-			.list<Lanche>("/lanches", (ref) =>
-				ref.orderByChild("tipo").equalTo(category)
+		return this.firestore
+			.collection<Lanche>("lanches", (ref) =>
+				ref.where("tipo", "==", category)
 			)
 			.valueChanges();
 	}

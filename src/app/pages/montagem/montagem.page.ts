@@ -1,125 +1,126 @@
-import { Component, OnInit } from '@angular/core';
-import { Favoritos } from 'src/app/models/favoritos/favoritos';
-import { Ingredient } from 'src/app/models/ingredientes/ingredientes';
-import { DadosService } from 'src/app/services/dados.service';
+import { Component, OnInit } from "@angular/core";
+import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { FavoriteService } from "src/app/services/favoritos.service";
+import { Ingredient } from "src/app/models/ingredientes/ingredientes";
+import { UserDataService } from "src/app/services/cliente-service.service";
 
 @Component({
-    selector: 'app-montagem',
-    templateUrl: './montagem.page.html',
-    styleUrls: ['./montagem.page.scss'],
+	selector: "app-montagem",
+	templateUrl: "./montagem.page.html",
+	styleUrls: ["./montagem.page.scss"],
 })
 export class MontagemPage implements OnInit {
-    constructor(private dataService: DadosService, private favoritosService: FavoritosService) {
-        this.burger = new Hamburguer();
-    }
-    ngOnInit() {
-    }
-    nomeLanche: string;
-    burger: Hamburguer;
-    vegetais = this.dataService.obterVegetais();
-    proteinas = this.dataService.obterProteinas();
-    paes = this.dataService.obterPaes();
-    queijos = this.dataService.obterQueijos();
-    molhos = this.dataService.obterMolhos();
-    complementos = this.dataService.obterComplementos();
+	ingredients: Ingredient[] = []; // List of available ingredients
+	selectedIngredients: { ingredient: Ingredient; quantidade: number }[] = []; // List of selected ingredients with quantities
+	snackName: string = ""; // Name for the burger
+	totalCalories: number = 0; // Total calories of the burger
+	userId: string | null = null; // Current user's ID
 
-    showVegetais: boolean = false;
-    showProteinas: boolean = false;
-    showPaes: boolean = false;
-    showMolhos: boolean = false;
-    showQueijos: boolean = false;
-    showComplementos: boolean = false;
+	constructor(
+		private dataService: UserDataService,
+		private favoriteService: FavoriteService,
+		private firestore: AngularFirestore
+	) {}
 
-    addFavoritos(burguer: Hamburguer) {
-        console.log(this.burger);
-        this.favoritosService.adicionarFavorito(burguer);
-        console.log(this.favoritosService);
-    }
+	ngOnInit() {}
 
-    addVegetable(vegetable: Ingredient): void {
-        this.burger.addPart(vegetable);
-        vegetable.quantity++;
-    }
-    removeVegetable(vegetable: Ingredient): void {
-        this.burger.removePart(vegetable);
-        vegetable.quantity--;
-    }
-    addPao(bun: Ingredient) {
-        this.burger.addPart(bun);
-        bun.quantity++;
-    }
+	ionViewWillEnter() {
+		// Load available ingredients with tiposLanche[] containing "hamburguer"
+		// Replace with your logic to fetch ingredients
+		this.loadIngredients();
 
-    addProteina(protein: Ingredient) {
-        this.burger.addPart(protein);
-        protein.quantity++;
-    }
+		// Get the current user
+		this.dataService.getCurrentUser().subscribe((user) => {
+			if (user) {
+				this.userId = user.uid;
+			} else {
+				this.userId = null;
+			}
+		});
+	}
 
-    addMolho(sauce: Ingredient) {
-        this.burger.addPart(sauce);
-        sauce.quantity++;
-    }
+	loadIngredients() {
+		// Implement logic to load ingredients with tiposLanche[] containing "hamburguer"
+		// Replace this.ingredients with the loaded ingredients
+	}
 
-    addSalad(salad: Ingredient) {
-        this.burger.addPart(salad);
-        salad.quantity++;
-    }
+	addIngredient(ingredient: Ingredient) {
+		// Check if the ingredient is already selected
+		const existingIngredient = this.selectedIngredients.find(
+			(item) => item.ingredient.id === ingredient.id
+		);
 
-    addQueijo(cheese: Ingredient) {
-        this.burger.addPart(cheese);
-        cheese.quantity++;
-    }
+		if (existingIngredient) {
+			// Increment the quantidade if the ingredient is already selected
+			existingIngredient.quantidade++;
+		} else {
+			// Add the ingredient with quantidade 1 if it's not selected
+			this.selectedIngredients.push({ ingredient, quantidade: 1 });
+		}
 
-    addComplemento(extra: Ingredient) {
-        this.burger.addPart(extra);
-        extra.quantity++;
-    }
+		// Calculate and update the total calories
+		this.totalCalories += ingredient.calorias;
+	}
 
+	removeIngredient(ingredient: Ingredient) {
+		// Find the selected ingredient
+		const existingIngredient = this.selectedIngredients.find(
+			(item) => item.ingredient.id === ingredient.id
+		);
 
-    removePao(bun: Ingredient) {
-        this.burger.removePart(bun);
-        bun.quantity--;
-    }
+		if (existingIngredient) {
+			// Decrement the quantidade
+			existingIngredient.quantidade--;
 
-    removeProteina(protein: Ingredient) {
-        this.burger.removePart(protein);
-        protein.quantity--;
-    }
+			// If the quantidade reaches zero, remove the ingredient
+			if (existingIngredient.quantidade === 0) {
+				const index =
+					this.selectedIngredients.indexOf(existingIngredient);
+				if (index !== -1) {
+					this.selectedIngredients.splice(index, 1);
+				}
+			}
 
-    removeMolho(sauce: Ingredient) {
-        this.burger.removePart(sauce);
-        sauce.quantity--;
-    }
+			// Calculate and update the total calories
+			this.totalCalories -= ingredient.calorias;
+		}
+	}
 
-    removeSalad(salad: Ingredient) {
-        this.burger.removePart(salad);
-        salad.quantity--;
-    }
+	saveBurger() {
+		if (this.userId) {
+			// Create a burger object with the selected ingredients and other details
+			const newId = this.firestore.createId();
+			const burger = {
+				id: newId,
+				tipo: "hamburguer",
+				nome: this.snackName,
+				calorias: this.totalCalories,
+				autor: this.userId,
+				ingredientes: this.selectedIngredients.map((item) => ({
+					id: item.ingredient.id,
+					quantidade: item.quantidade,
+				})),
+			};
 
-    removeQueijo(cheese: Ingredient) {
-        this.burger.removePart(cheese);
-        cheese.quantity--;
-    }
+			// Save the burger using your favoriteService
+			this.favoriteService
+				.addFavoriteSnack(this.userId, newId, burger)
+				.then(() => {
+					// Successfully saved
+					console.log("Burger saved as a favorite.");
+				})
+				.catch((error) => {
+					// Handle error
+					console.error("Error saving burger:", error);
+				});
+		}
+	}
 
-    removeComplemento(extra: Ingredient) {
-        this.burger.removePart(extra);
-        extra.quantity--;
-    }
+	ingredientquantidade(ingredient: Ingredient): number {
+		const selectedIngredient = this.selectedIngredients.find(
+			(item) => item.ingredient.id === ingredient.id
+		);
 
-    clear() {
-        this.burger = new Hamburguer();
-    }
-
-    getCalories() {
-        return this.burger.calories;
-    }
-
-    getBurger() {
-        this.burger.nome = this.nomeLanche;
-        console.log(this.burger)
-        this.favoritosService.adicionarFavorito(this.burger);
-        const foo = <HTMLElement>document.querySelector("body");
-        foo.classList.add("aparece");
-        return this.burger;
-    }
-
+		return selectedIngredient ? selectedIngredient.quantidade : 0;
+	}
 }

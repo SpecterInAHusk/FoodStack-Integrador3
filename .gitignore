@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,node,angular,ionic3,vim
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,node,angular,ionic3,vim
 
@@ -250,9 +249,7 @@ integrador3-3f3c2*.json
 populardb.js
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,node,angular,ionic3,vim
-=======
 node_modules
 *.old
 *.pack
 *.json
->>>>>>> origin/AVC
