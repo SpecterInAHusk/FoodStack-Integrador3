@@ -22,11 +22,18 @@
             <div class="montagem-interna row">
               <div class="col-xl-3 col-md-4 col-6 item-view">
                 <div class="nome-lanche">
-                    <label for="nome">Nome lanche</label>
-                    <input type="text" id="nome" name="nome" minlength="1" maxlength="20" [(ngModel)]="nomeLanche" required/>
-                  </div>                  
+                  <label for="nome">Nome lanche</label>
+                  <input type="text" id="nome" name="nome" minlength="1" maxlength="20" [(ngModel)]="nomeLanche" required/>
+                </div>
+                <div class="separacao-titulo">
+                  <i class="icon-separado" aria-hidden="true"></i>
+                </div>   
                 <div class="titulo-ingredientes">
                     <h2>Ingredientes</h2>
+                </div>
+                <div class="separacao-ingrediente">
+                  <i class="icon-swirl-esquerdo" aria-hidden="true"></i>
+                  <i class="icon-swirl-direito" aria-hidden="true"></i>
                 </div>
                 <div class="ingredientes">
                   <div class="container-ingredientes">
@@ -146,20 +153,23 @@
                 esse aqui tambem
               </div>
               <div class="col-xl-3 col-md-4 col-6 item-view">
+                <div class="titulo-balanca-calorias">Balança de calorias</div>
                 <div class="balanca-calorias">
                   <div class="imagem-balanca"></div>
-                  <div class="visualizador-calorias">
-                    <div class="contador-calorias">
-                      {{ getCalories() }}
+                  <div class="calorias-container">
+                    <div class="visualizador-calorias">
+                      <div class="contador-calorias">
+                        {{ getCalories() }}
+                      </div>
                     </div>
+                    <div class="texto-kcal">Kcal</div>
+                    <ion-button class="botao-salvar" (click)="getBurger() && clear()">
+                      Salvar
+                    </ion-button>
+                    <ion-button class="botao-salvar" (click)="clear()">
+                      Clear
+                    </ion-button>
                   </div>
-                  <div class="texto-kcal">Kcal</div>
-                  <ion-button class="botao-salvar" (click)="getBurger() && clear()">
-                    Salvar
-                  </ion-button>
-                  <ion-button class="botao-salvar" (click)="clear()">
-                    Clear
-                  </ion-button>
                 </div>
               </div>
             </div>
