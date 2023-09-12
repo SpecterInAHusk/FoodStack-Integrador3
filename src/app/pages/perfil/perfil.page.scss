@@ -109,9 +109,11 @@
             text-transform: uppercase;
             display: flex;
             .titulo-lanche{
+                font-family: "Bitstream Vera Mono";
                 color:#581a27;
                 height: 38px;
                 width: 100%;
+                white-space: nowrap;
             }
             .tipo-lanche{
                 width: 100%;

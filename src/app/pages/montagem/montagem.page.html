@@ -32,7 +32,7 @@
                   <div class="container-ingredientes">
 
                     <div class="tipo-ingredientes">
-                      <div class="nome-tipo" (click)="showVegetais = !showVegetais">Vegetais</div>
+                      <div class="nome-tipo" (click)="showVegetais = !showVegetais"> <div class="hide" *ngIf="showVegetais">v </div> <div class="show" *ngIf="!showVegetais">> </div> Vegetais</div>
                       <div class="lista-ingredientes" *ngIf="showVegetais">
                         <ul>
                             <li *ngFor="let vegetal of vegetais">
@@ -50,7 +50,7 @@
                     </div>
 
                     <div class="tipo-ingredientes">
-                        <div class="nome-tipo" (click)="showProteinas = !showProteinas">Proteinas</div>
+                        <div class="nome-tipo" (click)="showProteinas = !showProteinas"><div class="hide" *ngIf="showProteinas">v </div> <div class="show" *ngIf="!showProteinas">> </div>Proteinas</div>
                         <div class="lista-ingredientes" *ngIf="showProteinas">
                           <ul>
                               <li *ngFor="let proteina of proteinas">
@@ -68,7 +68,7 @@
                     </div>
 
                     <div class="tipo-ingredientes">
-                        <div class="nome-tipo" (click)="showPaes = !showPaes">Pães</div>
+                        <div class="nome-tipo" (click)="showPaes = !showPaes"><div class="hide" *ngIf="showPaes">v </div> <div class="show" *ngIf="!showPaes">> </div>Pães</div>
                         <div class="lista-ingredientes" *ngIf="showPaes">
                           <ul>
                               <li *ngFor="let pao of paes">
@@ -86,7 +86,7 @@
                     </div>
 
                     <div class="tipo-ingredientes">
-                        <div class="nome-tipo" (click)="showMolhos = !showMolhos">Molhos</div>
+                        <div class="nome-tipo" (click)="showMolhos = !showMolhos"><div class="hide" *ngIf="showMolhos">v </div> <div class="show" *ngIf="!showMolhos">> </div>Molhos</div>
                         <div class="lista-ingredientes" *ngIf="showMolhos">
                           <ul>
                               <li *ngFor="let molho of molhos">
@@ -104,7 +104,7 @@
                     </div>
 
                     <div class="tipo-ingredientes">
-                        <div class="nome-tipo" (click)="showQueijos = !showQueijos">Queijos</div>
+                        <div class="nome-tipo" (click)="showQueijos = !showQueijos"><div class="hide" *ngIf="showQueijos">v </div> <div class="show" *ngIf="!showQueijos">> </div>Queijos</div>
                         <div class="lista-ingredientes" *ngIf="showQueijos">
                           <ul>
                               <li *ngFor="let queijo of queijos">
@@ -122,7 +122,7 @@
                     </div>
 
                     <div class="tipo-ingredientes">
-                        <div class="nome-tipo" (click)="showComplementos = !showComplementos">Complementos</div>
+                        <div class="nome-tipo" (click)="showComplementos = !showComplementos"><div class="hide" *ngIf="showComplementos">v </div> <div class="show" *ngIf="!showComplementos">> </div>Complementos</div>
                         <div class="lista-ingredientes" *ngIf="showComplementos">
                           <ul>
                               <li *ngFor="let complemento of complementos">

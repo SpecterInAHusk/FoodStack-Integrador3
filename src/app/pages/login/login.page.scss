@@ -35,6 +35,21 @@
             border-radius: 5px;
         }
     }
+    input[type="checkbox"]{
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 14px;
+        height: 14px;
+        margin: 10px 0 0 0;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background: #fff;
+    }
+    input:checked{
+        background-color: #753c30;
+    }
     .btn{
         color: rgb(247, 245, 236);
         display: block;
