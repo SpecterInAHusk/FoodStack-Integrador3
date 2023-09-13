@@ -43,10 +43,6 @@ const routes: Routes = [
         loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminPageModule)
     },
     {
-        path: 'cadastrar',
-        loadChildren: () => import('./pages/cadastrar/cadastrar.module').then(m => m.CadastrarPageModule)
-    },
-    {
         path: 'recuperar-senha',
         loadChildren: () => import('./pages/recuperar-senha/recuperar-senha.module').then(m => m.RecuperarSenhaPageModule)
     },
@@ -61,13 +57,22 @@ const routes: Routes = [
     {
         path: 'perfil',
         loadChildren: () => import('./perfil/perfil.module').then(m => m.PerfilPageModule)
-    },  {
+    },
+  {
     path: 'add-ingrediente',
     loadChildren: () => import('./pages/add-ingrediente/add-ingrediente.module').then( m => m.AddIngredientePageModule)
   },
   {
     path: 'admin',
     loadChildren: () => import('./pages/admin/admin.module').then( m => m.AdminPageModule)
+  },
+  {
+    path: 'montagem',
+    loadChildren: () => import('./view/testes/montagem/montagem.module').then( m => m.MontagemPageModule)
+  },
+  {
+    path: 'montagem',
+    loadChildren: () => import('./pages/testes/montagem/montagem.module').then( m => m.MontagemPageModule)
   },
 
 

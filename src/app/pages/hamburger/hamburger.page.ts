@@ -12,7 +12,7 @@ export class HamburgerPage implements OnInit {
 	selectedBreadType: string = ""; // Limitação de quantidade de pães
 	breadTypes: string[] = [];
 
-	constructor(private ingredienteService: IngredienteService) {}
+	constructor(private ingredienteService: IngredientDataService) {}
 
 	ngOnInit() {
 		// Fetch bread types from the database based on the "bread" ingredient category
