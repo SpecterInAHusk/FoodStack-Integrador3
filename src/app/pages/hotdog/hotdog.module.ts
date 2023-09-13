@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { HotdogPageRoutingModule } from './hotdog-routing.module';
 
 import { HotdogPage } from './hotdog.page';
+import { CustomHeaderModule} from 'src/app/components/custom header/custom-header.module';
+import { CustomFooterModule } from 'src/app/components/custom-footer/custom-footer.module';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        HotdogPageRoutingModule
+        HotdogPageRoutingModule,
+        CustomHeaderModule,
+        CustomFooterModule
     ],
     declarations: [HotdogPage]
 })
