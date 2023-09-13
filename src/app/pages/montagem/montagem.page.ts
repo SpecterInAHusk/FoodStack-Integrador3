@@ -3,6 +3,7 @@ import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { FavoriteService } from "src/app/services/favoritos.service";
 import { Ingredient } from "src/app/models/ingredientes/ingredientes";
 import { UserDataService } from "src/app/services/cliente-service.service";
+import { IngredientDataService } from "src/app/services/ingrediente-service";
 
 @Component({
 	selector: "app-montagem",
@@ -10,26 +11,25 @@ import { UserDataService } from "src/app/services/cliente-service.service";
 	styleUrls: ["./montagem.page.scss"],
 })
 export class MontagemPage implements OnInit {
-	ingredients: Ingredient[] = []; // List of available ingredients
-	selectedIngredients: { ingredient: Ingredient; quantidade: number }[] = []; // List of selected ingredients with quantities
-	snackName: string = ""; // Name for the burger
-	totalCalories: number = 0; // Total calories of the burger
-	userId: string | null = null; // Current user's ID
+	ingredients: Ingredient[] = []; // Lista dos ingredientes disponíveis
+	selectedIngredients: { ingredient: Ingredient; quantidade: number }[] = []; // Lista dos ingredientes selecionados com suas quantidades
+	lancheName: string = "";
+	totalCalories: number = 0;
+	userId: string | null = null;
+	filteredIngredients: Ingredient[] = [];
+	categories: string[] = [];
+	selectedCategories: string[] = [];
 
 	constructor(
 		private dataService: UserDataService,
 		private favoriteService: FavoriteService,
-		private firestore: AngularFirestore
+		private firestore: AngularFirestore,
+		private ingredientService: IngredientDataService
 	) {}
 
-	ngOnInit() {}
-
-	ionViewWillEnter() {
-		// Load available ingredients with tiposLanche[] containing "hamburguer"
-		// Replace with your logic to fetch ingredients
+	ngOnInit() {
 		this.loadIngredients();
 
-		// Get the current user
 		this.dataService.getCurrentUser().subscribe((user) => {
 			if (user) {
 				this.userId = user.uid;
@@ -40,8 +40,11 @@ export class MontagemPage implements OnInit {
 	}
 
 	loadIngredients() {
-		// Implement logic to load ingredients with tiposLanche[] containing "hamburguer"
-		// Replace this.ingredients with the loaded ingredients
+		this.ingredientService
+			.searchIngredientsByTypesLanche(["hamburguer"])
+			.subscribe((ingredients) => {
+				this.ingredients = ingredients;
+			});
 	}
 
 	addIngredient(ingredient: Ingredient) {
@@ -58,7 +61,6 @@ export class MontagemPage implements OnInit {
 			this.selectedIngredients.push({ ingredient, quantidade: 1 });
 		}
 
-		// Calculate and update the total calories
 		this.totalCalories += ingredient.calorias;
 	}
 
@@ -93,7 +95,7 @@ export class MontagemPage implements OnInit {
 			const burger = {
 				id: newId,
 				tipo: "hamburguer",
-				nome: this.snackName,
+				nome: this.lancheName,
 				calorias: this.totalCalories,
 				autor: this.userId,
 				ingredientes: this.selectedIngredients.map((item) => ({
@@ -115,12 +117,34 @@ export class MontagemPage implements OnInit {
 				});
 		}
 	}
+	filterByCategory() {
+		if (this.selectedCategories.length === 0) {
+			this.filteredIngredients = this.ingredients;
+		} else {
+			this.filteredIngredients = this.ingredients.filter((ingredient) =>
+				this.selectedCategories.includes(ingredient.categoria)
+			);
+		}
+	}
 
-	ingredientquantidade(ingredient: Ingredient): number {
+	toggleCategory(category: string) {
+		const index = this.selectedCategories.indexOf(category);
+		if (index === -1) {
+			this.selectedCategories.push(category);
+		} else {
+			this.selectedCategories.splice(index, 1);
+		}
+		this.filterByCategory();
+	}
+
+	ingredientQuantidade(ingredient: Ingredient): number {
 		const selectedIngredient = this.selectedIngredients.find(
 			(item) => item.ingredient.id === ingredient.id
 		);
 
 		return selectedIngredient ? selectedIngredient.quantidade : 0;
 	}
+isSelectedCategory(category: string): boolean {
+    return this.selectedCategories.includes(category);
+  }
 }
