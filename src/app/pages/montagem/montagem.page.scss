@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
 #main{
     position:relative;
     height: 100%;
@@ -250,10 +251,10 @@ h2{
                     float:inline-end;
 
                     .icone-ingrediente{
+                        
                         background-color: rgb(238, 205, 177);
                         border-radius:10px;
                         text-align: center;
-                        @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
                         font-family: 'Robot Mono', monospace;
                         font-size: 20px;
                         font-weight: 500;

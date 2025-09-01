@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -19,6 +19,7 @@ import { CustomFooterModule } from 'src/app/components/custom-footer/custom-foot
         CustomHeaderModule,
         CustomFooterModule
     ],
-    declarations: [PizzaPage]
+    declarations: [PizzaPage],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class PizzaPageModule { }
